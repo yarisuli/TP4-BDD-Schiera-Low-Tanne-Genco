@@ -177,7 +177,7 @@ Completar todos los archivos que sean necesarios para que la API funcione correc
 
 index: LISTO!!
 
-CONTROLLERS
+CONTROLLERS (probar a ver si resultado correcto con VSCode REST Client en .REST)
 
 albumes:
 artistas:

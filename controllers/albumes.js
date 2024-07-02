@@ -19,6 +19,10 @@ const getAlbumes = async (_, res) => {
             ...
         ]
     */
+        const [rows, fields] = await conn.query 
+        (`SELECT albumes.id, albumes.nombre, artistas.nombre FROM albumes
+            JOIN artistas on artistas.id = albumes.artista`);
+        res.json(rows); //MAL!! DA MAL RTA
 };
 
 const getAlbum = async (req, res) => {
