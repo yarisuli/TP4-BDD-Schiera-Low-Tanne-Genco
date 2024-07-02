@@ -162,10 +162,10 @@ La API que debe tener las siguientes rutas:
 
 #### Ejercicio 0
 
-- Crear la base de datos `spoticfy` en `phpMyAdmin` e importar el archivo `spoticfy.sql` que se encuentra en la raíz del proyecto.
-- Instalar las dependencias del proyecto con `npm install`.
-- Completar el archivo `db.js` con la lógica necesaria para conectarse a la base de datos.
-- Probar que la API funciona, ejecutando el proyecto con `npm start` o `npm run dev` y probando con una request de tipo `GET` a la ruta `/`.
+- Crear la base de datos `spoticfy` en `phpMyAdmin` e importar el archivo `spoticfy.sql` que se encuentra en la raíz del proyecto. LISTO!!
+- Instalar las dependencias del proyecto con `npm install`. LISTO!!
+- Completar el archivo `db.js` con la lógica necesaria para conectarse a la base de datos. LISTO!!
+- Probar que la API funciona, ejecutando el proyecto con `npm start` o `npm run dev` y probando con una request de tipo `GET` a la ruta `/`. LISTO!!
 
 #### Ejercicio 1
 
@@ -173,7 +173,15 @@ Para saber que conocen bien la estructura de la base de datos, deberán realizar
 
 #### Ejercicio 2
 
-Completar todos los archivos que sean necesarios para que la API funcione correctamente. Es decir, completar los controladores de cada tabla y el archivo `index.js` con las rutas de la API.
+Completar todos los archivos que sean necesarios para que la API funcione correctamente. Es decir, completar los controladores de cada tabla y el archivo `index.js` con las rutas de la API. 
+
+index: LISTO!!
+
+CONTROLLERS
+
+albumes:
+artistas:
+canciones:
 
 ## Entrega
 
