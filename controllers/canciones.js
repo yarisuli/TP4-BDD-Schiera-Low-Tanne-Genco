@@ -14,17 +14,15 @@ const getCanciones = async (_, res) => {
                 "duracion": "Duración de la canción",
                 "reproducciones": "Reproducciones de la canción"
             },
-            {
-                "id": "Id de la canción",
-                "nombre": "Nombre de la canción",
-                "nombre_artista": "Id del artista",
-                "nombre_album": "Id del album",
-                "duracion": "Duración de la canción",
-                "reproducciones": "Reproducciones de la canción"
-            },
-            ...
-        ]
+           
     */
+            const [rows, fields] = await conn.query
+            (`SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones  
+            FROM canciones 
+            JOIN albumes ON canciones.album = albumes.id
+            JOIN artistas ON albumes.artista = artistas.id`);
+                
+                res.json(rows); //NO SE SI DA BIEN RESULTADO
 };
 
 const getCancion = async (req, res) => {
@@ -41,6 +39,16 @@ const getCancion = async (req, res) => {
             "reproducciones": "Reproducciones de la canción"
         }
     */
+        const id = req.params.id;
+        
+        const [rows, fields] = await conn.query
+        (`SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones  
+        FROM canciones 
+        JOIN albumes ON canciones.album = albumes.id
+        JOIN artistas ON albumes.artista = artistas.id
+        WHERE canciones.id = ?`,[id]);
+        
+        res.json(rows[0]); //NO SE SI DA BIEN RESULTADO
 };
 
 const createCancion = async (req, res) => {
@@ -55,6 +63,19 @@ const createCancion = async (req, res) => {
         }
     */
     // (Reproducciones se inicializa en 0)
+
+    const nombre = req.body.nombre;
+    const album = req.body.album;
+    const duracion = req.body.duracion;
+    
+    const [rows, fields] = await conn.query('INSERT INTO canciones (nombre,album,duracion) VALUES (?,?,?)',[nombre, album, duracion]);
+    
+    res.json({
+        nombre: nombre,
+        album: album,
+        duracion: duracion
+        }); //NO SE SI DA BIEN RESULTADO
+
 };
 
 const updateCancion = async (req, res) => {
@@ -69,6 +90,20 @@ const updateCancion = async (req, res) => {
         }
     */
     // (Reproducciones no se puede modificar con esta consulta)
+
+    const id = req.params.id;
+    const nombre = req.body.nombre;
+    const album = req.body.album;
+    const duracion = req.body.duracion;    
+    
+    const [rows, fields] = await conn.query(`UPDATE canciones SET nombre = ?, album =?, duracion = ?
+    WHERE id = ?`,[nombre,album,duracion,id]);
+    
+    res.json({
+        nombre: nombre,
+        album: album,
+        duracion: duracion
+        }); //NO SE SI DA BIEN RESULTADO
 };
 
 const deleteCancion = async (req, res) => {
