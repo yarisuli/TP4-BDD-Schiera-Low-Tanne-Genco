@@ -179,7 +179,7 @@ index: LISTO!!
 
 CONTROLLERS (probar a ver si resultado correcto con VSCode REST Client en .REST)
 
-albumes:
+albumes: LISTO!!
 artistas:
 canciones:
 

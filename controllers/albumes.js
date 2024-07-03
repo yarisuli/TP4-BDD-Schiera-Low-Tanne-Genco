@@ -12,8 +12,8 @@ const getAlbum = async (req, res) => {
     
     const id = req.params.id;
     const [rows, fields] = await conn.query 
-    (`SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista from albumes
-    JOIN artistas on artistas.id= albumes.artista
+    (`SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista FROM albumes
+    JOIN artistas on artistas.id = albumes.artista
     WHERE albumes.id = ?`,[id]);
     res.json(rows[0]); 
 };
@@ -36,7 +36,7 @@ const updateAlbum = async (req, res) => {
     const nombre = req.body.nombre;
     const artista = req.body.artista;
     const [rows, fields] = await conn.query
-    (`UPDATE albumes SET nombre = ?, artista =?
+    (`UPDATE albumes SET nombre = ?, artista = ?
     WHERE id = ?`,[nombre,artista,id]);
     res.json({
         nombre: nombre,
