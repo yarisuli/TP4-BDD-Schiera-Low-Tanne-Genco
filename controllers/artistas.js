@@ -3,6 +3,7 @@ import { conn } from "../db.js";
 const getArtistas = async (_, res) => {
     
     const [rows, fields] = await conn.query('SELECT * FROM artistas');
+    
     res.json(rows);
 };
 
@@ -10,18 +11,19 @@ const getArtista = async (req, res) => {
     
     const id = req.params.id;
     const [rows, fields] = await conn.query('SELECT id, nombre FROM artistas WHERE id = ?',[id]);
+    
     res.json(rows[0]);
 };
 
 const createArtista = async (req, res) => {
-    // Completar con la consulta que crea un artista
-    // Recordar que los parámetros de una consulta POST se encuentran en req.body
-    // Deberían recibir los datos de la siguiente forma:
-    /*
-        {
-            "nombre": "Nombre del artista",
-        }
-    */
+
+        const nombre = req.body.nombre;
+        
+        const [rows, fields] = await conn.query('INSERT INTO artistas (nombre) VALUES (?)',[nombre]);
+        
+        res.json({
+            nombre: nombre
+            });
 };
 
 const updateArtista = async (req, res) => {
