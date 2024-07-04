@@ -107,13 +107,22 @@ const updateCancion = async (req, res) => {
 };
 
 const deleteCancion = async (req, res) => {
-    // Completar con la consulta que elimina una canción
-    // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
+    const id = req.params.id;
+    
+    const [rows, fields] = await conn.query
+    (`DELETE FROM canciones WHERE id = ?`,[id]);
+    
+    res.send(`Se eliminó correctamente`);
 };
 
 const reproducirCancion = async (req, res) => {
-    // Completar con la consulta que aumenta las reproducciones de una canción
-    // En este caso es una consulta PUT, pero no recibe ningún parámetro en el body, solo en los params
+    const id = req.params.id;  
+    
+    const [rows, fields] = await conn.query
+    (`UPDATE canciones SET reproducciones = reproducciones + 1
+    WHERE id = ?`,[id]);
+    
+    res.send(`Se actualizó correctamente`);
 };
 
 const canciones = {
