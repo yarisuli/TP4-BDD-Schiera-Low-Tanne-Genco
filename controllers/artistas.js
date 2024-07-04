@@ -11,6 +11,7 @@ const getArtistas = async (_, res) => {
 const getArtista = async (req, res) => {
     
     const id = req.params.id;
+    
     const [rows, fields] = await conn.query
     ('SELECT id, nombre FROM artistas WHERE id = ?',[id]);
     
@@ -19,14 +20,14 @@ const getArtista = async (req, res) => {
 
 const createArtista = async (req, res) => {
 
-        const nombre = req.body.nombre;
+    const nombre = req.body.nombre;
         
-        const [rows, fields] = await conn.query
-        ('INSERT INTO artistas (nombre) VALUES (?)',[nombre]);
+    const [rows, fields] = await conn.query
+    ('INSERT INTO artistas (nombre) VALUES (?)',[nombre]);
         
-        res.json({
-            nombre: nombre
-            });
+    res.json({
+        nombre: nombre
+        });
 };
 
 const updateArtista = async (req, res) => {
@@ -40,7 +41,6 @@ const updateArtista = async (req, res) => {
     res.json({
         nombre: nombre
         });
-    
 };
 
 const deleteArtista = async (req, res) => {
@@ -50,7 +50,7 @@ const deleteArtista = async (req, res) => {
     const [rows, fields] = await conn.query
     (`DELETE FROM artistas WHERE id = ?`,[id]);
     
-    res.send(`Se eliminó correctamente`);
+    res.send("Se eliminó correctamente.");
 };
 
 const getAlbumesByArtista = async (req, res) => {
@@ -63,12 +63,13 @@ const getAlbumesByArtista = async (req, res) => {
     JOIN artistas ON artistas.id=albumes.artista
     WHERE artistas.id= ?`,[id]);
     
-    res.json(rows[0]); //PROBAR
+    res.json(rows[0]);
 };
 
 const getCancionesByArtista = async (req, res) => {
     
     const id = req.params.id;
+    
     const [rows, fields] = await conn.query(`
     SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones  
     from canciones 
@@ -76,7 +77,7 @@ const getCancionesByArtista = async (req, res) => {
     JOIN artistas ON albumes.artista = artistas.id
     WHERE artistas.id = ?`,[id]); 
     
-    res.json(rows); //PROBAR
+    res.json(rows); 
 };
 
 const artistas = {
