@@ -57,7 +57,7 @@ const deleteAlbum = async (req, res) => {
     const [rows, fields] = await conn.query
     (`DELETE FROM albumes WHERE id = ?`,[id]);
     
-    res.send(`Se eliminó correctamente`);
+    res.send("Se eliminó correctamente.");
 };
 
 const getCancionesByAlbum = async (req, res) => {

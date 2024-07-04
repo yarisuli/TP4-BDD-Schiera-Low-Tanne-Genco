@@ -112,7 +112,7 @@ const deleteCancion = async (req, res) => {
     const [rows, fields] = await conn.query
     (`DELETE FROM canciones WHERE id = ?`,[id]);
     
-    res.send(`Se eliminó correctamente`);
+    res.send(`Se eliminó correctamente`);  //NO SE SI DA BIEN RESULTADO
 };
 
 const reproducirCancion = async (req, res) => {
@@ -122,7 +122,7 @@ const reproducirCancion = async (req, res) => {
     (`UPDATE canciones SET reproducciones = reproducciones + 1
     WHERE id = ?`,[id]);
     
-    res.send(`Se actualizó correctamente`);
+    res.send(`Se actualizó correctamente`);  //NO SE SI DA BIEN RESULTADO
 };
 
 const canciones = {
