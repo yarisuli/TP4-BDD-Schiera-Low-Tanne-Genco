@@ -13,7 +13,7 @@ const getArtista = async (req, res) => {
     const id = req.params.id;
     
     const [rows, fields] = await conn.query
-    ('SELECT id, nombre FROM artistas WHERE id = ?',[id]);
+    ('SELECT id, nombre FROM artistas WHERE id = ?', [id]);
     
     res.json(rows[0]);
 };
@@ -23,7 +23,7 @@ const createArtista = async (req, res) => {
     const nombre = req.body.nombre;
         
     const [rows, fields] = await conn.query
-    ('INSERT INTO artistas (nombre) VALUES (?)',[nombre]);
+    ('INSERT INTO artistas (nombre) VALUES (?)', [nombre]);
         
     res.json({
         nombre: nombre
@@ -36,7 +36,7 @@ const updateArtista = async (req, res) => {
     const nombre = req.body.nombre;
     
     const [rows, fields] = await conn.query
-    (`UPDATE artistas SET nombre = ? WHERE id = ?`,[nombre, id]);
+    (`UPDATE artistas SET nombre = ? WHERE id = ?`, [nombre, id]);
     
     res.json({
         nombre: nombre
@@ -60,8 +60,8 @@ const getAlbumesByArtista = async (req, res) => {
     const [rows, fields] = await conn.query
     (`SELECT albumes.id, albumes.nombre, artistas.nombre AS nombre_artista 
     FROM albumes 
-    JOIN artistas ON artistas.id=albumes.artista
-    WHERE artistas.id= ?`,[id]);
+    JOIN artistas ON artistas.id = albumes.artista
+    WHERE artistas.id= ?`, [id]);
     
     res.json(rows[0]);
 };
@@ -75,7 +75,7 @@ const getCancionesByArtista = async (req, res) => {
     from canciones 
     JOIN albumes ON canciones.album = albumes.id
     JOIN artistas ON albumes.artista = artistas.id
-    WHERE artistas.id = ?`,[id]); 
+    WHERE artistas.id = ?`, [id]); 
     
     res.json(rows); 
 };

@@ -2,13 +2,13 @@ import { conn } from "../db.js";
 
 const getCanciones = async (_, res) => {
    
-            const [rows, fields] = await conn.query
-            (`SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones  
-            FROM canciones 
-            JOIN albumes ON canciones.album = albumes.id
-            JOIN artistas ON albumes.artista = artistas.id`);
+        const [rows, fields] = await conn.query
+        (`SELECT canciones.id, canciones.nombre, artistas.nombre AS nombre_artista, albumes.nombre AS nombre_album, canciones.duracion, canciones.reproducciones  
+        FROM canciones 
+        JOIN albumes ON canciones.album = albumes.id
+        JOIN artistas ON albumes.artista = artistas.id`);
                 
-                res.json(rows);
+        res.json(rows);
 };
 
 const getCancion = async (req, res) => {
@@ -20,7 +20,7 @@ const getCancion = async (req, res) => {
         FROM canciones 
         JOIN albumes ON canciones.album = albumes.id
         JOIN artistas ON albumes.artista = artistas.id
-        WHERE canciones.id = ?`,[id]);
+        WHERE canciones.id = ?`, [id]);
         
         res.json(rows[0]);
 };
@@ -32,8 +32,8 @@ const createCancion = async (req, res) => {
     const duracion = req.body.duracion;
     
     const [rows, fields] = await conn.query
-    ('INSERT INTO canciones (nombre,album,duracion) VALUES (?,?,?)',[nombre, album, duracion]);
-    
+    ('INSERT INTO canciones (nombre,album,duracion) VALUES (?,?,?)', [nombre, album, duracion]);
+     
     res.json({
         nombre: nombre,
         album: album,
@@ -51,7 +51,7 @@ const updateCancion = async (req, res) => {
     
     const [rows, fields] = await conn.query
     (`UPDATE canciones SET nombre = ?, album =?, duracion = ?
-    WHERE id = ?`,[nombre, album, duracion, id]);
+    WHERE id = ?`, [nombre, album, duracion, id]);
     
     res.json({
         nombre: nombre,
@@ -64,7 +64,7 @@ const deleteCancion = async (req, res) => {
     const id = req.params.id;
     
     const [rows, fields] = await conn.query
-    (`DELETE FROM canciones WHERE id = ?`,[id]);
+    (`DELETE FROM canciones WHERE id = ?`, [id]);
     
     res.send("Se eliminó correctamente.");
 };
@@ -74,7 +74,7 @@ const reproducirCancion = async (req, res) => {
     
     const [rows, fields] = await conn.query
     (`UPDATE canciones SET reproducciones = reproducciones + 1
-    WHERE id = ?`,[id]);
+    WHERE id = ?`, [id]);
     
     res.send("Se actualizó correctamente.");
 };
